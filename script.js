@@ -43,7 +43,7 @@ for (let i = 0; i < 9; i++) {
   btnGroup.appendChild(hideBtn);
 
   const smallText = document.createElement("small");
-  smallText.className = "text-muted sostId";
+  smallText.classList.add("sostId", "text-muted");
   smallText.textContent = `${(i + 1) * 3} mins`;
 
   footer.appendChild(btnGroup);
@@ -56,10 +56,8 @@ for (let i = 0; i < 9; i++) {
   col.appendChild(card);
   container.appendChild(col);
 
-  //brutto pk nel ciclo non va bene rivedere poi
   hideBtn.addEventListener("click", function (event) {
     event.preventDefault();
-
     col.classList.add("d-none");
   });
 }
@@ -82,10 +80,7 @@ fetch(URL, {
     return response.json();
   })
   .then((catImgs) => {
-    console.log("catImgs", catImgs);
-
     const arrOfPhoto = catImgs.photos;
-    const arrOfIds = catImgs.id;
 
     document.getElementById("bottoneCaricamneto").addEventListener("click", function (event) {
       event.preventDefault();
@@ -95,7 +90,7 @@ fetch(URL, {
       });
 
       arrayOfContainerImgsId.forEach((id, i) => {
-        id.textContent = arrOfIds[i];
+        id.textContent = arrOfPhoto[i].id;
       });
     });
   })
@@ -119,7 +114,6 @@ fetch(URL2, {
   })
   .then((fishImgs) => {
     const arrOfPhoto2 = fishImgs.photos;
-    const arrOfIds2 = fishImgs.id;
 
     document.getElementById("bottoneCaricamneto2").addEventListener("click", function (event) {
       event.preventDefault();
@@ -129,7 +123,7 @@ fetch(URL2, {
       });
 
       arrayOfContainerImgsId.forEach((id, i) => {
-        id.textContent = arrOfIds2[i];
+        id.textContent = arrOfPhoto2[i].id;
       });
     });
   })

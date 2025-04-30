@@ -130,3 +130,40 @@ fetch(URL2, {
   .catch((error) => {
     console.error("Errore durante la richiesta:", error);
   });
+
+// Funzione generica per caricare immagini da Pexels
+function loadImages(query) {
+  const searchURL = `https://api.pexels.com/v1/search?query=${query}&per_page=9`;
+
+  fetch(searchURL, {
+    headers: {
+      Authorization: "5g8JSZnUDtJDA4iEXiQ3mF7QBAiCtbw5cV08XznA7E3V5f2bCDovWq27",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
+      return response.json();
+    })
+    .then((data) => {
+      const photos = data.photos;
+
+      arrayOfContainerImgs.forEach((img, i) => {
+        if (photos[i]) img.src = photos[i].src.portrait;
+      });
+
+      arrayOfContainerImgsId.forEach((id, i) => {
+        if (photos[i]) id.textContent = photos[i].id;
+      });
+    })
+    .catch((error) => {
+      console.error("Errore durante la richiesta immagini:", error);
+    });
+}
+
+// Listener per il bottone di ricerca
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const query = document.getElementById("searchInput").value.trim();
+  if (query) {
+    loadImages(query);
+  }
+});

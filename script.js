@@ -66,7 +66,7 @@ for (let i = 0; i < 9; i++) {
 }
 
 const arrayOfContainerImgs = document.querySelectorAll("img");
-const arrayOfContainerImgsId = document.getElementsByClassName("sostId");
+const arrayOfContainerImgsId = Array.from(document.getElementsByClassName("sostId"));
 
 const query = "cat";
 const URL = `https://api.pexels.com/v1/search?query=${query}&per_page=9`;

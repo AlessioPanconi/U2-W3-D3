@@ -43,8 +43,7 @@ for (let i = 0; i < 9; i++) {
   btnGroup.appendChild(hideBtn);
 
   const smallText = document.createElement("small");
-  smallText.className = `sostId`;
-  smallText.className = "text-muted";
+  smallText.className = "text-muted sostId";
   smallText.textContent = `${(i + 1) * 3} mins`;
 
   footer.appendChild(btnGroup);
